@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import {Tasks} from "./tasks1/Tasks";
 import {TaskForTodoList} from "./todolist2/TaskForTodoList";
+import {UseRef} from "./ref3/UseRef";
+
 
 
 // Hi Guys!
@@ -14,7 +16,8 @@ function App() {
     return (
         <div className="App">
             {/*<Tasks/>*/}
-            <TaskForTodoList/>
+            {/*<TaskForTodoList/>*/}
+            <UseRef/>
         </div>
     );
 }
