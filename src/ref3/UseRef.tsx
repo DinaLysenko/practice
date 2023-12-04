@@ -60,7 +60,7 @@ export function UseRef() {
     ]);
 
     function removeTask(id: string) {
-        let filteredTasks = tasks.filter(t => t.id != id);
+        let filteredTasks = tasks.filter(t => t.id !== id);
         setTasks(filteredTasks);
     }
 
@@ -71,15 +71,18 @@ export function UseRef() {
     }
 
     let [filter, setFilter] = useState<FilterValuesType>("all");
-
-    let tasksForTodolist = tasks;
-
-    if (filter === "active") {
-        tasksForTodolist = tasks.filter(t => t.isDone === false);
+    const filteredTasks = () => {
+        let tasksForTodolist = tasks;
+        switch (filter) {
+            case "active":
+                return tasksForTodolist = tasks.filter(t => !t.isDone);
+            case "completed":
+                return tasksForTodolist = tasks.filter(t => t.isDone);
+            default:
+                return tasksForTodolist
+        }
     }
-    if (filter === "completed") {
-        tasksForTodolist = tasks.filter(t => t.isDone === true);
-    }
+
 
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
@@ -89,30 +92,30 @@ export function UseRef() {
     return (
         <div className="App">
             <UseRefTodolist title="What to learn"
-                            tasks={tasksForTodolist}
+                            tasks={filteredTasks()}
                             removeTask={removeTask}
                             changeFilter={changeFilter}
                             addTask={addTask}>
                 <div>
-                    <div>Many intresting information</div>
+                    <div>Many interesting information</div>
                 </div>
             </UseRefTodolist>
             <UseRefTodolist title="What to learn"
-                            tasks={tasksForTodolist}
+                            tasks={filteredTasks()}
                             removeTask={removeTask}
                             changeFilter={changeFilter}
                             addTask={addTask}>
                 <div>
-                    <div>Many intresting information</div>
+                    <div>Many interesting information</div>
                 </div>
             </UseRefTodolist>
             <UseRefTodolist title="What to learn"
-                            tasks={tasksForTodolist}
+                            tasks={filteredTasks()}
                             removeTask={removeTask}
                             changeFilter={changeFilter}
                             addTask={addTask}>
                 <div>
-                    <div>Many intresting information</div>
+                    <div>Many interesting information</div>
                 </div>
             </UseRefTodolist>
         </div>
